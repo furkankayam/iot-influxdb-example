@@ -1,0 +1,28 @@
+# SPRING
+spring:
+  application:
+    name: spring-boot-influxdb-example
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+# MQTT
+mqtt:
+  client-id: bf6b3de92a6aecf33ce5680f4c957d980a73fad1
+  broker-url: ${BROKER_URL:tcp://localhost:1883}
+  subscribe-topic: ${SUBSCRIBE_TOPIC:temperature}
+
+# INFLUXDB
+influx:
+  url: ${INFLUXDB_URL:http://localhost:8086}
+  token: ${INFLUXDB_TOKEN:d21f57a10b63fe11d52932ddb5e4f234c4cc1ed3}
+  bucket: ${INFLUXDB_BUCKET:influxdbv2_bucket}
+  org: ${INFLUXDB_ORG:influxdbv2_org}
+
+management:
+  influx:
+    metrics:
+      export:
+        bucket: core-application
+        enabled: false

@@ -1,0 +1,70 @@
+# Services
+services:
+
+  # Example Service
+  example-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: example-service
+    restart: always
+    environment:
+      BROKER_URL: tcp://mqtt:1883
+      SUBSCRIBE_TOPIC: temperature
+      INFLUXDB_URL: http://influxdbv2_dev:8086
+      INFLUXDB_TOKEN: d21f57a10b63fe11d52932ddb5e4f234c4cc1ed3
+      INFLUXDB_BUCKET: influxdbv2_bucket
+      INFLUXDB_ORG: influxdbv2_org
+    depends_on:
+      - mqtt
+      - influxdbv2_dev
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+
+  # Mosquitto
+  mqtt:
+    image: eclipse-mosquitto:2.0.18
+    container_name: mqtt
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt/config:/mosquitto/config
+    networks:
+      - my-network
+
+  # InfluxDB v2
+  influxdbv2_dev:
+    image: influxdb:2.7.9
+    container_name: influxdbv2_dev
+    restart: always
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: admin12345
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: d21f57a10b63fe11d52932ddb5e4f234c4cc1ed3
+      DOCKER_INFLUXDB_INIT_BUCKET: influxdbv2_bucket
+      DOCKER_INFLUXDB_INIT_ORG: influxdbv2_org
+    volumes:
+      - influxdbv2-data:/var/lib/influxdb2
+      - influxdbv2-config:/etc/influxdb2
+    ports:
+      - "8086:8086"
+    networks:
+      - my-network
+
+
+# Volumes
+volumes:
+  mqtt:
+  postgres_data:
+  influxdbv2-data:
+  influxdbv2-config:
+
+# Networks
+networks:
+  my-network:
+    driver: bridge

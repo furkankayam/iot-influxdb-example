@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.furkankayam'
+version = 'v.0.1'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    // InfluxDB dependencies
+    implementation 'com.influxdb:influxdb-client-java:7.3.0'
+	runtimeOnly 'io.micrometer:micrometer-registry-influx'
+
+    // MQTT dependencies
+    implementation "org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5"
+
+    // JSON processing
+    implementation 'org.json:json:20250517'
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
