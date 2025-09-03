@@ -1,42 +1,42 @@
 # 🌐 IoT InfluxDB Example
 
 <div align="center">
-  <h3>⚡ Architecture Schema</h3>
+  <h3>⚡ Architecture Schema </h3>
   <img src="./images/schema.png" alt="architecture schema">
 </div>
 
 <br>
 
 <details>
-<summary>🌡️ ESP32</summary>
+<summary>🌡️ ESP32 </summary>
 <img src="./images/esp32.jpg" alt="esp32">
 </details>
 
 <br>
 
 <details>
-<summary>💬 MQTT</summary>
+<summary>💬 MQTTX </summary>
 <img src="./images/mqttx.png" alt="mqttx">
 </details>
 
 <br>
 
 <details>
-<summary>📊 InfluxDB</summary>
+<summary>📊 InfluxDB </summary>
 <img src="./images/influxdb.png" alt="influxdb">
 </details>
 
 <br>
 
 <details>
-<summary>🐳 Docker</summary>
+<summary>🐳 Docker </summary>
 <img src="./images/docker.png" alt="docker">
 </details>
 
 <br>
 
 <details>
-<summary>🧪 Postman</summary>
+<summary>🧪 Postman </summary>
 <img src="./images/postman.png" alt="postman">
 </details>
 
